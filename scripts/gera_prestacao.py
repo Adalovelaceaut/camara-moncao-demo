@@ -10,11 +10,16 @@ leads = db.execute("SELECT count(*) FROM leads").fetchone()[0]
 por_motivo = db.execute("SELECT COALESCE(NULLIF(motivo,''),'outros assuntos'), count(*) FROM chamados GROUP BY 1 ORDER BY 2 DESC").fetchall()
 por_status = dict(db.execute("SELECT COALESCE(status,'?'), count(*) FROM chamados GROUP BY 1").fetchall())
 msgs = db.execute("SELECT count(*) FROM mensagens").fetchone()[0]
+NOMES = {"ana": "Gabinete-piloto Ana", "caio": "Gabinete-piloto Caio"}
+por_gab = db.execute("SELECT COALESCE(NULLIF(dono,''),'(na fila, sem gabinete)'), count(*) FROM chamados GROUP BY 1 ORDER BY 2 DESC").fetchall()
 total_ch = sum(por_status.values())
 abertos = sum(v for k, v in por_status.items() if k not in ("fechado", "concluido", "resolvido"))
 agora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
 
 ROTULOS = {"pediu_humano": "falar com um atendente", "venda": "informações e serviços", "precisa": "resolver um problema", "retomada": "retomar a conversa", "gestor": "falar com a equipe"}
+gab_rows = "".join(
+    f"<tr><td>{html.escape(NOMES.get(g, g))}</td><td class='n'>{n}</td></tr>"
+    for g, n in por_gab) or "<tr><td colspan='2'>Sem demandas atribuidas ainda.</td></tr>"
 linhas = "".join(
     f"<tr><td>{html.escape(ROTULOS.get(m, m))}</td><td class='n'>{n}</td><td class='n'>{round(100*n/max(total_ch,1))}%</td></tr>"
     for m, n in por_motivo) or "<tr><td colspan='3'>Sem chamados ainda.</td></tr>"
@@ -22,7 +27,7 @@ linhas = "".join(
 pagina = f"""<!doctype html>
 <html lang="pt-BR" data-tema="marinho"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prestação de contas — Câmara de Monção (demonstração)</title>
+<title>Miro Câmara — Prestação de contas por gabinete (demonstração)</title>
 <link rel="stylesheet" href="/web/style.css">
 <style>
 body{{margin:0;font-family:var(--corpo);background:var(--bg);color:var(--tinta)}}
@@ -42,7 +47,7 @@ td.n,th.n{{text-align:right}}
 h2{{font-family:var(--titulo);font-size:16px;margin:18px 0 8px}}
 footer{{margin-top:22px;color:var(--mut);font-size:12px;text-align:center;border-top:1px solid var(--linha);padding-top:12px}}
 </style></head><body><div class="pag">
-<header class="barra"><span class="mono">CM</span><div><h1>Prestação de contas</h1>
+<header class="barra"><span class="mono">CM</span><div><h1>Miro Câmara · Prestação de contas</h1>
 <span class="sub">Câmara de Monção · canal do cidadão · demonstração</span></div></header>
 <div class="cards">
 <div class="card"><div class="v">{leads}</div><div class="l">cidadãos atendidos</div></div>
@@ -50,6 +55,8 @@ footer{{margin-top:22px;color:var(--mut);font-size:12px;text-align:center;border
 <div class="card"><div class="v">{abertos}</div><div class="l">em acompanhamento</div></div>
 <div class="card"><div class="v">{msgs}</div><div class="l">mensagens trocadas</div></div>
 </div>
+<h2>Demandas por gabinete</h2>
+<table><tr><th>Gabinete</th><th class="n">Demandas</th></tr>{gab_rows}</table>
 <h2>Demandas por assunto (pauta para indicações)</h2>
 <table><tr><th>Assunto</th><th class="n">Pedidos</th><th class="n">%</th></tr>{linhas}</table>
 <footer>Painel de demonstração gerado a partir dos dados fictícios da demo em {agora}.<br>
