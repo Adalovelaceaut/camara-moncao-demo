@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="marinho">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>Câmara de Monção — Fale com a Câmara</title>
+<script>try{var a=JSON.parse(localStorage.getItem('al_aparencia')||'{}');if(a.tema)document.documentElement.dataset.tema=a.tema;}catch(e){}</script>
+<link rel="stylesheet" href="/web/style.css">
+<style>
+body{margin:0;font-family:var(--corpo);background:var(--bg);color:var(--tinta)}
+#landing{max-width:960px;margin:0 auto;padding:0 18px 40px}
+.barra{display:flex;align-items:center;gap:10px;padding:16px 0}
+.monograma{width:42px;height:42px;border-radius:50%;background:#f0a500;color:#1a1206;display:flex;align-items:center;justify-content:center;font-family:var(--titulo);font-weight:700;font-size:17px;flex:none}
+.barra h1{font-family:var(--titulo);font-size:18px;margin:0}
+.barra .tag{font-size:12px;color:var(--mut)}
+.hero{text-align:center;padding:34px 0 10px}
+.hero .selo{display:inline-block;font-size:12px;letter-spacing:.4px;color:#1a1206;background:#f0a500;border-radius:99px;padding:4px 14px;font-weight:600;margin-bottom:16px}
+.hero h2{font-family:var(--titulo);font-size:34px;line-height:1.15;margin:0 0 12px}
+.hero p{color:var(--mut);font-size:16px;max-width:560px;margin:0 auto 22px;line-height:1.5}
+.acoes{display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto}
+.btn-hero{border:1px solid var(--linha2);background:var(--sup);color:var(--tinta);border-radius:12px;padding:14px 18px;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--corpo)}
+.btn-hero.pri{background:#f0a500;border-color:#f0a500;color:#1a1206}
+.btn-hero:hover{filter:brightness(1.08)}
+section.bloco{margin-top:34px}
+section.bloco h3{font-family:var(--titulo);font-size:20px;margin:0 0 14px;text-align:center}
+.pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pilar{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:16px}
+.pilar .num{color:#f0a500;font-family:var(--titulo);font-weight:700;font-size:20px}
+.pilar h4{margin:6px 0 4px;font-size:15px}
+.pilar p{margin:0;color:var(--mut);font-size:13px;line-height:1.45}
+.grade{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.serv{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;font-size:14px}
+.serv b{display:block;margin-bottom:2px}
+.serv span{color:var(--mut);font-size:12.5px}
+.mesa{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ver{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:12px 16px}
+.ver b{font-size:14px}
+.ver span{display:block;color:var(--mut);font-size:12px}
+.onde{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:16px;font-size:14px;line-height:1.7}
+.onde b{color:#f0a500}
+footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-height:1.6;border-top:1px solid var(--linha);padding-top:18px}
+#chatview{height:100vh;height:100dvh;display:flex;flex-direction:column}
+.barra-chat{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--faixa);border-bottom:1px solid var(--linha)}
+#voltar{background:none;border:1px solid var(--linha2);color:var(--tinta);border-radius:10px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:var(--corpo)}
+.barra-chat span{font-size:13px;color:var(--mut)}
+#chatview .chat-app{flex:1;min-height:0;width:100%}
+@media(min-width:640px){.acoes{flex-direction:row;max-width:640px}.btn-hero{flex:1}}
+@media(max-width:640px){.pilares{grid-template-columns:1fr}.grade{grid-template-columns:1fr}.mesa{grid-template-columns:1fr}.hero h2{font-size:27px}}
+</style>
+</head>
+<body>
+<div id="landing">
+  <header class="barra">
+    <span class="monograma" aria-hidden="true">CM</span>
+    <div>
+      <h1>Câmara de Monção</h1>
+      <span class="tag">Canal do cidadão · demonstração</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="selo">DEMONSTRAÇÃO</span>
+    <h2>Sua voz na Câmara de Monção</h2>
+    <p>Reclamações, denúncias, sugestões e contato com os vereadores, direto do seu celular. Um assistente responde na hora e a equipe da Câmara acompanha cada pedido.</p>
+    <div class="acoes">
+      <button class="btn-hero pri" data-chat>Falar com a Câmara</button>
+      <button class="btn-hero" data-chat>Agendar com vereador</button>
+      <button class="btn-hero" data-chat>Ouvidoria</button>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h3>Como funciona</h3>
+    <div class="pilares">
+      <div class="pilar"><div class="num">1</div><h4>Conte o que precisa</h4><p>Escreva sua mensagem: falta d'água, buraco na rua, iluminação, sugestão de lei ou pedido aos vereadores.</p></div>
+      <div class="pilar"><div class="num">2</div><h4>Registro na hora</h4><p>O assistente virtual registra seu pedido na conversa e já orienta sobre o encaminhamento.</p></div>
+      <div class="pilar"><div class="num">3</div><h4>A equipe acompanha</h4><p>No horário de atendimento, a equipe da Câmara assume a conversa e responde diretamente.</p></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h3>O que você resolve aqui</h3>
+    <div class="grade">
+      <div class="serv"><b>Ouvidoria</b><span>Reclamações, denúncias e sugestões sobre os serviços públicos de Monção.</span></div>
+      <div class="serv"><b>Falta d'água e saneamento</b><span>Relatos encaminhados com cobrança formal de resposta.</span></div>
+      <div class="serv"><b>Ruas, pontes e iluminação</b><span>Problemas de vias e praças em qualquer bairro ou povoado.</span></div>
+      <div class="serv"><b>Agendamento com vereador</b><span>Marque um horário no gabinete para tratar do seu assunto.</span></div>
+      <div class="serv"><b>Pauta e leis</b><span>Informações sobre sessões, projetos de lei e o trabalho da Câmara.</span></div>
+      <div class="serv"><b>Fale com a equipe</b><span>Atendimento humano de segunda a sexta, 8h às 12h e 13h30 às 17h.</span></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h3>Mesa diretora</h3>
+    <div class="mesa">
+      <div class="ver"><b>Luís Alfredo</b><span>Presidente</span></div>
+      <div class="ver"><b>Daérlio</b><span>Vice-presidente</span></div>
+      <div class="ver"><b>Lindolene Aragão</b><span>1ª secretária</span></div>
+      <div class="ver"><b>Flávio Campos</b><span>2º secretário</span></div>
+    </div>
+    <p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">A Câmara de Monção tem 13 vereadores. Lista completa em <a href="https://www.cmmoncao.ma.gov.br/" style="color:var(--link)">cmmoncao.ma.gov.br</a>.</p>
+  </section>
+
+  <section class="bloco">
+    <h3>Onde estamos</h3>
+    <div class="onde">
+      <b>Câmara Municipal de Monção</b><br>
+      Praça Presidente Kennedy, s/n — Centro, Monção-MA · CEP 65360-000<br>
+      Prédio de reuniões: Rua da Saudade, s/n — Centro<br>
+      (98) 98540-4359 · (98) 99102-6875 · diretoria@cmmoncao.ma.gov.br<br>
+      Segunda a sexta, 8h às 12h e 13h30 às 17h
+    </div>
+  </section>
+
+  <footer>
+    Página de demonstração tecnológica: os atendimentos usam dados fictícios e nenhum relato tem efeito oficial.<br>
+    Feita sobre o projeto aberto Atende Leads (INEMA, licença MIT).
+  </footer>
+</div>
+
+<div id="chatview" hidden>
+  <div class="barra-chat">
+    <button id="voltar" type="button">← Voltar</button>
+    <span>Atendimento da Câmara de Monção</span>
+  </div>
+  <div class="chat-app">
+    <header class="chat-cab">
+      <span class="logo" id="logo" aria-hidden="true">·</span>
+      <div>
+        <h1 id="negocio">Atendimento</h1>
+        <p class="estado" id="estado"><span class="dot" aria-hidden="true"></span><span id="estado-txt">Assistente virtual · responde na hora</span></p>
+      </div>
+    </header>
+    <section id="entrada" class="entrada">
+      <form id="form-entrada" class="painel">
+        <h2>Fale com a gente</h2>
+        <p class="mut">Um assistente responde na hora e, se precisar, chama alguém da equipe. O WhatsApp é para a equipe poder te responder se você sair desta página.</p>
+        <label class="campo">Seu nome <input id="nome" autocomplete="name" maxlength="80"></label>
+        <label class="campo">WhatsApp com DDD <input id="telefone" inputmode="tel" autocomplete="tel" placeholder="(41) 99999-0000" required aria-describedby="erro-entrada"></label>
+        <button class="btn pri" type="submit">Começar conversa</button>
+        <p id="erro-entrada" class="erro" role="alert"></p>
+      </form>
+    </section>
+    <section id="chat" class="chat" hidden>
+      <div id="log" class="chat-log conv" aria-live="polite"></div>
+      <form id="form-msg" class="chat-form">
+        <label for="texto" class="sr">Sua mensagem</label>
+        <textarea id="texto" rows="1" autocomplete="off" enterkeyhint="send" placeholder="Escreva sua mensagem" required></textarea>
+        <button class="enviar" type="submit" aria-label="Enviar"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg></button>
+      </form>
+    </section>
+  </div>
+</div>
+<script>
+(function(){
+  var landing=document.getElementById('landing'), chatview=document.getElementById('chatview');
+  function abrir(){landing.hidden=true;chatview.hidden=false;document.body.classList.add('pagina-chat');window.scrollTo(0,0);}
+  function fechar(){chatview.hidden=true;landing.hidden=false;document.body.classList.remove('pagina-chat');}
+  document.querySelectorAll('[data-chat]').forEach(function(b){b.addEventListener('click',abrir);});
+  document.getElementById('voltar').addEventListener('click',fechar);
+})();
+</script>
+<script src="/web/comum.js"></script>
+<script src="/web/chat.js"></script>
+</body>
+</html>

@@ -37,3 +37,7 @@ A configuração usa a identidade do site oficial da Câmara (cmmoncao.ma.gov.br
 ## Cérebro LLM (opcional)
 
 A demo pode responder com um agente Hermes local em vez de só regras: `cerebro: {"tipo": "openai", "url": "http://127.0.0.1:8644", "modelo": "hermes-agent"}` + variáveis `CEREBRO_API_KEY` e `CEREBRO_HOSTS_PERMITIDOS=127.0.0.1`. O agente roda isolado (HERMES_HOME próprio, api_server só em localhost, sem ferramentas) com persona em `SOUL.md`. Na instalação de referência ele usa uma conta ChatGPT pessoal já existente — válido só para demonstração, não para produção.
+
+## Página inicial do cidadão (12/11)
+
+`web/index.html` substitui a página inicial do Atende Leads por uma landing da Câmara de Monção: hero com chamada, ações (falar com a Câmara, agendar com vereador, ouvidoria), "como funciona", serviços, mesa diretora e contatos públicos. O chat original fica embutido e abre a partir dos botões (sem mudar rotas nem o servidor). Para usar: copie por cima de `web/index.html` na instalação do Atende Leads (o arquivo original fica salvo como `index.original-chat.html.bak`).
