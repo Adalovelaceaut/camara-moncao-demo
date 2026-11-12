@@ -41,3 +41,8 @@ A demo pode responder com um agente Hermes local em vez de só regras: `cerebro:
 ## Página inicial do cidadão (12/11)
 
 `web/index.html` substitui a página inicial do Atende Leads por uma landing da Câmara de Monção: hero com chamada, ações (falar com a Câmara, agendar com vereador, ouvidoria), "como funciona", serviços, mesa diretora e contatos públicos. O chat original fica embutido e abre a partir dos botões (sem mudar rotas nem o servidor). Para usar: copie por cima de `web/index.html` na instalação do Atende Leads (o arquivo original fica salvo como `index.original-chat.html.bak`).
+
+## Módulo Gabinete (proposta + protótipo, 12/11)
+
+- `docs/nota-gabinete-camara-moncao.pdf` — nota estratégica (2 páginas): papel da Câmara (legislar, fiscalizar, representar, indicações), o que a demo já cobre e a proposta do Módulo Gabinete (fila por vereador, rascunho de indicação, prazos, prestação de contas pública, agenda).
+- `scripts/gera_prestacao.py` — gera `web/prestacao.html` (painel público de prestação de contas: atendidos, demandas por assunto, acompanhamento) a partir do `leads.db`. Protótipo em staging: rota `/prestacao` adicionada em `ESTATICOS` no `src/server.py` (só na instância de teste).
