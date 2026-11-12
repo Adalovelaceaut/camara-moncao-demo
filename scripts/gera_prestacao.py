@@ -10,7 +10,24 @@ leads = db.execute("SELECT count(*) FROM leads").fetchone()[0]
 por_motivo = db.execute("SELECT COALESCE(NULLIF(motivo,''),'outros assuntos'), count(*) FROM chamados GROUP BY 1 ORDER BY 2 DESC").fetchall()
 por_status = dict(db.execute("SELECT COALESCE(status,'?'), count(*) FROM chamados GROUP BY 1").fetchall())
 msgs = db.execute("SELECT count(*) FROM mensagens").fetchone()[0]
-NOMES = {"ana": "Gabinete Ver. Daerlio (atend. Ana)", "caio": "Gabinete Ver.ª Lindolene (atend. Caio)"}
+NOMES = {
+    "ana": "Gabinete Ver. Daerlio (atend. Ana)",
+    "rafa": "Gabinete Ver. Daerlio (atend. Rafa)",
+    "bia": "Gabinete Ver.ª Lindolene (atend. Bia)",
+    "rui": "Gabinete Ver.ª Lindolene (atend. Rui)",
+    "teo": "Gabinete Ver. Moizaniel (atend. Téo)",
+    "zeca": "Gabinete Ver. Luís Alfredo (atend. Zeca)",
+    "lia": "Gabinete Ver. Amorim (atend. Lía)",
+    "nando": "Gabinete Ver. Chapreu (atend. Nando)",
+    "mara": "Gabinete Ver. Chixolinha (atend. Mara)",
+    "ivo": "Gabinete Ver. Dr. Abrão Muniz (atend. Ivo)",
+    "sol": "Gabinete Ver. Dr. Anderson Carvalho (atend. Sol)",
+    "du": "Gabinete Ver. Flávio Campos (atend. Du)",
+    "kiko": "Gabinete Ver. Junior da Pesca (atend. Kiko)",
+    "dani": "Gabinete Ver. Nonato do Sindicato (atend. Dani)",
+    "leo": "Gabinete Ver. Uerickson do Castelo (atend. Léo)",
+    "caio": "Ouvidoria da Câmara (Caio)",
+}
 por_gab = db.execute("SELECT COALESCE(NULLIF(dono,''),'(na fila, sem gabinete)'), count(*) FROM chamados GROUP BY 1 ORDER BY 2 DESC").fetchall()
 total_ch = sum(por_status.values())
 abertos = sum(v for k, v in por_status.items() if k not in ("fechado", "concluido", "resolvido"))

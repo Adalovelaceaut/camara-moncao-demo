@@ -85,25 +85,41 @@ def dias_para(prazo):
     return (prazo - HOJE).days
 
 # ---------- dados ficticios da demonstracao ----------
+GABINETES = [
+    ("daerlio", "Gabinete Ver. Daerlio", "Ana e Rafa"),
+    ("lindolene", "Gabinete Ver.\u00aa Lindolene", "Bia e Rui"),
+    ("moizaniel", "Gabinete Ver. Moizaniel", "T\u00e9o"),
+    ("luis-alfredo", "Gabinete Ver. Lu\u00eds Alfredo", "Zeca"),
+    ("amorim", "Gabinete Ver. Amorim", "L\u00eda"),
+    ("chapreu", "Gabinete Ver. Chapreu", "Nando"),
+    ("chixolinha", "Gabinete Ver. Chixolinha", "Mara"),
+    ("dr-abrao-muniz", "Gabinete Ver. Dr. Abr\u00e3o Muniz", "Ivo"),
+    ("dr-anderson-carvalho", "Gabinete Ver. Dr. Anderson Carvalho", "Sol"),
+    ("flavio-campos", "Gabinete Ver. Fl\u00e1vio Campos", "Du"),
+    ("junior-da-pesca", "Gabinete Ver. Junior da Pesca", "Kiko"),
+    ("nonato-do-sindicato", "Gabinete Ver. Nonato do Sindicato", "Dani"),
+    ("uerickson-do-castelo", "Gabinete Ver. Uerickson do Castelo", "L\u00e9o"),
+]
+
 DEMANDAS = [
-    ("ana", "Falta d'agua recorrente", "Bairro Centro", 3, "3 manifestacoes no canal do gabinete"),
-    ("ana", "Iluminacao apagada", "Praca Presidente Kennedy", 2, "2 manifestacoes no canal do gabinete"),
-    ("caio", "Rua escorregadia / buracos", "Rua do Porto", 1, "1 manifestacao no canal do gabinete"),
-    ("caio", "Limpeza publica", "Mercado Municipal", 1, "1 manifestacao no canal do gabinete"),
+    ("daerlio", "Falta d'agua recorrente", "Bairro Centro", 3, "3 manifestacoes no canal do gabinete"),
+    ("lindolene", "Iluminacao apagada", "Praca Presidente Kennedy", 2, "2 manifestacoes no canal do gabinete"),
+    ("moizaniel", "Rua escorregadia / buracos", "Rua do Porto", 1, "1 manifestacao no canal do gabinete"),
+    ("luis-alfredo", "Limpeza publica", "Mercado Municipal", 1, "1 manifestacao no canal do gabinete"),
 ]
 
 RASCUNHOS = [
-    ("ana", "INDICACAO", "nº ___/2026", "Iluminacao da Praca Presidente Kennedy", "indicacao", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 0),
-    ("ana", "REQUERIMENTO", "nº ___/2026", "Informacoes sobre a falta d'agua no Centro", "requerimento", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 1),
-    ("caio", "PROJETO DE LEI", "nº ___/2026", "Programa de Manutencao Preventiva de Vias e Pracas", "projeto", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 2),
+    ("lindolene", "INDICACAO", "n\u00ba ___/2026", "Iluminacao da Praca Presidente Kennedy", "indicacao", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 0),
+    ("daerlio", "REQUERIMENTO", "n\u00ba ___/2026", "Informacoes sobre a falta d'agua no Centro", "requerimento", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 1),
+    ("moizaniel", "PROJETO DE LEI", "n\u00ba ___/2026", "Programa de Manutencao Preventiva de Vias e Pracas", "projeto", ["Rascunho pronto", "Revisao do(a) vereador(a)", "Protocolo", "Comissao", "Plenario"], 2),
 ]
 
 # protocolo: (gab, numero, assunto, bairro, enviado, prazo, respondido_em ou None)
 PROTOCOLOS = [
-    ("ana", "REQ 012/2026", "Falta d'agua", "Bairro Centro", datetime.date(2026,10,20), datetime.date(2026,11,19), None),
-    ("ana", "IND 034/2026", "Iluminacao publica", "Praca Pres. Kennedy", datetime.date(2026,11,5), datetime.date(2026,12,5), None),
-    ("caio", "OF 007/2026", "Rua escorregadia", "Rua do Porto", datetime.date(2026,9,10), datetime.date(2026,10,10), None),
-    ("caio", "REQ 011/2026", "Limpeza publica", "Mercado Municipal", datetime.date(2026,11,2), datetime.date(2026,12,2), datetime.date(2026,11,8)),
+    ("daerlio", "REQ 012/2026", "Falta d'agua", "Bairro Centro", datetime.date(2026,10,20), datetime.date(2026,11,19), None),
+    ("lindolene", "IND 034/2026", "Iluminacao publica", "Praca Pres. Kennedy", datetime.date(2026,11,5), datetime.date(2026,12,5), None),
+    ("moizaniel", "OF 007/2026", "Rua escorregadia", "Rua do Porto", datetime.date(2026,9,10), datetime.date(2026,10,10), None),
+    ("luis-alfredo", "REQ 011/2026", "Limpeza publica", "Mercado Municipal", datetime.date(2026,11,2), datetime.date(2026,12,2), datetime.date(2026,11,8)),
 ]
 
 HISTORICO = [
@@ -114,10 +130,10 @@ HISTORICO = [
 ]
 
 LEMBRETES = [
-    ("ana", "Sessao ordinaria (simulada) - terca e quinta, 15h. Proxima: quinta, 13/11."),
-    ("ana", "REQ 012/2026 (falta d'agua) vence em %d dias (19/11) - cobrar resposta da Prefeitura." % dias_para(datetime.date(2026,11,19))),
-    ("caio", "OF 007/2026 (rua escorregadia) aguarda resposta ha %d dias - reiterar cobranca." % -dias_para(datetime.date(2026,10,10))),
-    ("geral", "Levar rascunhos revisados ao protocolo ate sexta, 14/11, para entrar na pauta da proxima sessao."),
+    ("*", "Sessao ordinaria (simulada) - terca e quinta, 15h. Proxima: quinta, 13/11."),
+    ("daerlio", "REQ 012/2026 (falta d'agua) vence em %d dias (19/11) - cobrar resposta da Prefeitura." % dias_para(datetime.date(2026,11,19))),
+    ("moizaniel", "OF 007/2026 (rua escorregadia) aguarda resposta ha %d dias - reiterar cobranca." % -dias_para(datetime.date(2026,10,10))),
+    ("*", "Levar rascunhos revisados ao protocolo ate sexta, 14/11, para entrar na pauta da proxima sessao."),
 ]
 
 # ---------- monta HTML ----------
@@ -171,6 +187,10 @@ hist_html = "".join(
 lembr_html = "".join(
     f"<li class='gitem' data-gab='{g}'>{html.escape(t)}</li>" for g, t in LEMBRETES)
 
+opcoes_gab = "\n".join(
+    f"<option value='{g}'>{html.escape(nome)} — atend. {html.escape(equipe)}</option>"
+    for g, nome, equipe in GABINETES)
+
 agora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
 
 pagina = f"""<!doctype html>
@@ -185,9 +205,8 @@ body{{margin:0;font-family:var(--corpo);background:var(--bg);color:var(--tinta)}
 .mono{{width:40px;height:40px;border-radius:50%;background:#f0a500;color:#1a1206;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--titulo);flex:none}}
 h1{{font-family:var(--titulo);font-size:21px;margin:0}}
 .sub{{color:var(--mut);font-size:13px}}
-.abas{{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}}
-.abas button{{border:1px solid var(--linha);background:var(--sup);color:var(--tinta);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:var(--corpo)}}
-.abas button.ativa{{background:#f0a500;border-color:#f0a500;color:#1a1206;font-weight:700}}
+.abas{{display:flex;gap:10px;margin:14px 0 4px;flex-wrap:wrap;align-items:center}}
+.abas select{{border:1px solid var(--linha);background:var(--sup);color:var(--tinta);border-radius:10px;padding:8px 12px;font-size:13.5px;font-family:var(--corpo);max-width:100%}}
 .secao{{font-family:var(--titulo);font-size:15px;letter-spacing:.06em;margin:22px 0 4px;color:#f0a500;text-transform:uppercase}}
 .secao-desc{{color:var(--mut);font-size:12.5px;margin:0 0 10px}}
 .cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}}
@@ -226,11 +245,13 @@ footer{{margin-top:24px;color:var(--mut);font-size:12px;text-align:center;border
 <header class="barra"><span class="mono" id="monoF">CM</span><img src="/web/midia/brasao.png" alt="Brasão de Monção" style="display:none;width:42px;height:auto" onload="this.style.display='block';document.getElementById('monoF').style.display='none'"><div><h1>Miro Câmara · Página Gabinete</h1>
 <span class="sub">Câmara de Monção · trabalho dos gabinetes · demonstração</span></div></header>
 <div class="abas" id="abas">
-<button data-g="geral" class="ativa">Visão geral</button>
-<button data-g="ana">Gabinete Ver. Daerlio</button>
-<button data-g="caio">Gabinete Ver.ª Lindolene</button>
+<label for="selgab" style="font-size:13px;color:var(--mut)">Espaço do gabinete:</label>
+<select id="selgab">
+<option value="geral">Visão geral (todos os gabinetes)</option>
+{opcoes_gab}
+</select>
 </div>
-<p class="secao-desc">Cada gabinete tem seu espaço; a visão geral soma todos. Gabinete do vereador Daerlio · atendimento: Ana (assessora) · Gabinete da vereadora Lindolene Aragão · atendimento: Caio (assessor). Dados fictícios de demonstração.</p>
+<p class="secao-desc">Cada gabinete tem seu espaço e seus próprios assessores; a visão geral soma todos. Escolha um gabinete para ver só as demandas, protocolos e rascunhos dele. Dados fictícios de demonstração.</p>
 
 <div class="secao">Legislar</div>
 <p class="secao-desc">As demandas que chegam pelo chat viram pauta: agrupadas por assunto e bairro, o assistente Hermes redige o <b>rascunho</b> da propositura (indicação, requerimento ou projeto de lei) — sempre para o vereador revisar antes de protocolar. Não é parecer jurídico.</p>
@@ -258,16 +279,13 @@ Brasão: site oficial da Câmara de Monção (cmmoncao.ma.gov.br).<br>
 Os rascunhos de propositura são texto de apoio gerado por IA (agente Hermes) e exigem revisão do vereador antes de qualquer uso oficial.</footer>
 </div>
 <script>
-var abas=document.querySelectorAll('#abas button');
-abas.forEach(function(b){{b.addEventListener('click',function(){{
-  abas.forEach(function(x){{x.classList.remove('ativa')}});
-  b.classList.add('ativa');
-  var g=b.getAttribute('data-g');
+document.getElementById('selgab').addEventListener('change',function(){{
+  var g=this.value;
   document.querySelectorAll('.gitem').forEach(function(el){{
     var dg=el.getAttribute('data-gab');
-    el.classList.toggle('oculto', g!=='geral' && dg!==g);
+    el.classList.toggle('oculto', g!=='geral' && dg!==g && dg!=='*');
   }});
-}});}});
+}});
 </script>
 </body></html>"""
 open(OUT, "w").write(pagina)
