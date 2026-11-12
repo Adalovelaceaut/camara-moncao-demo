@@ -5,7 +5,7 @@ import sqlite3, html, datetime, sys
 DB = sys.argv[1] if len(sys.argv) > 1 else "/home/ada/camara-demo-hermes-dados/leads.db"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "/home/ada/camara-demo-hermes-app/web/prestacao.html"
 
-db = sqlite3.connect(DB)
+db = sqlite3.connect("file:%s?mode=ro" % DB, uri=True)
 leads = db.execute("SELECT count(*) FROM leads").fetchone()[0]
 por_motivo = db.execute("SELECT COALESCE(NULLIF(motivo,''),'outros assuntos'), count(*) FROM chamados GROUP BY 1 ORDER BY 2 DESC").fetchall()
 por_status = dict(db.execute("SELECT COALESCE(status,'?'), count(*) FROM chamados GROUP BY 1").fetchall())
