@@ -116,7 +116,7 @@ HISTORICO = [
 LEMBRETES = [
     ("ana", "Sessao ordinaria (simulada) - terca e quinta, 15h. Proxima: quinta, 13/11."),
     ("ana", "REQ 012/2026 (falta d'agua) vence em %d dias (19/11) - cobrar resposta da Prefeitura." % dias_para(datetime.date(2026,11,19))),
-    ("caio", "OF 007/2026 (rua escorregadia) esta vencido ha %d dias sem resposta - reiterar cobranca." % -dias_para(datetime.date(2026,10,10))),
+    ("caio", "OF 007/2026 (rua escorregadia) aguarda resposta ha %d dias - reiterar cobranca." % -dias_para(datetime.date(2026,10,10))),
     ("geral", "Levar rascunhos revisados ao protocolo ate sexta, 14/11, para entrar na pauta da proxima sessao."),
 ]
 
@@ -150,7 +150,7 @@ def linha_protocolo(g, num, assunto, bairro, enviado, prazo, respondido):
     else:
         drest = dias_para(prazo)
         if drest < 0:
-            st = "<span class='pill venc'>VENCIDO sem resposta</span>"
+            st = "<span class='pill venc'>aguardando resposta</span>"
             d = f"<b class='venc'>{-drest}d de atraso</b>"
         elif drest <= 7:
             st = "<span class='pill warn'>vence em breve</span>"
@@ -223,14 +223,14 @@ ul.lembr li{{background:var(--sup);border:1px solid var(--linha);border-radius:1
 footer{{margin-top:24px;color:var(--mut);font-size:12px;text-align:center;border-top:1px solid var(--linha);padding-top:12px}}
 .oculto{{display:none}}
 </style></head><body><div class="pag">
-<header class="barra"><span class="mono">CM</span><div><h1>Miro Câmara · Página Gabinete</h1>
+<header class="barra"><span class="mono" id="monoF">CM</span><img src="/web/midia/brasao.png" alt="Brasão de Monção" style="display:none;width:42px;height:auto" onload="this.style.display='block';document.getElementById('monoF').style.display='none'"><div><h1>Miro Câmara · Página Gabinete</h1>
 <span class="sub">Câmara de Monção · trabalho dos gabinetes · demonstração</span></div></header>
 <div class="abas" id="abas">
 <button data-g="geral" class="ativa">Visão geral</button>
-<button data-g="ana">Gabinete-piloto Ana</button>
-<button data-g="caio">Gabinete-piloto Caio</button>
+<button data-g="ana">Gabinete Ver. Daerlio</button>
+<button data-g="caio">Gabinete Ver.ª Lindolene</button>
 </div>
-<p class="secao-desc">Cada gabinete tem seu espaço. A visão geral soma todos. Dados fictícios de demonstração.</p>
+<p class="secao-desc">Cada gabinete tem seu espaço; a visão geral soma todos. Gabinete do vereador Daerlio · atendimento: Ana (assessora) · Gabinete da vereadora Lindolene Aragão · atendimento: Caio (assessor). Dados fictícios de demonstração.</p>
 
 <div class="secao">Legislar</div>
 <p class="secao-desc">As demandas que chegam pelo chat viram pauta: agrupadas por assunto e bairro, o assistente Hermes redige o <b>rascunho</b> da propositura (indicação, requerimento ou projeto de lei) — sempre para o vereador revisar antes de protocolar. Não é parecer jurídico.</p>
@@ -253,7 +253,8 @@ footer{{margin-top:24px;color:var(--mut);font-size:12px;text-align:center;border
 <h2 style="font-family:var(--titulo);font-size:15px;margin:16px 0 8px">Lembretes de pauta e sessões</h2>
 <ul class="lembr">{lembr_html}</ul>
 
-<footer>Página de demonstração gerada em {agora}. Todos os nomes, protocolos, prazos e rascunhos são fictícios.<br>
+<footer>Página de demonstração gerada em {agora}. Protocolos, prazos, demandas e rascunhos são fictícios.<br>
+Brasão: site oficial da Câmara de Monção (cmmoncao.ma.gov.br).<br>
 Os rascunhos de propositura são texto de apoio gerado por IA (agente Hermes) e exigem revisão do vereador antes de qualquer uso oficial.</footer>
 </div>
 <script>

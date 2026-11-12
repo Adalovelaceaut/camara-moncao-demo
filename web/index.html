@@ -34,6 +34,7 @@ section.bloco h3{font-family:var(--titulo);font-size:20px;margin:0 0 14px;text-a
 .serv span{color:var(--mut);font-size:12.5px}
 .mesa{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .ver{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:12px 16px}
+.ver img{width:100%;height:150px;object-fit:cover;object-position:top;border-radius:10px;margin-bottom:8px}
 .ver b{font-size:14px}
 .ver span{display:block;color:var(--mut);font-size:12px}
 .onde{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:16px;font-size:14px;line-height:1.7}
@@ -51,7 +52,8 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
 <body>
 <div id="landing">
   <header class="barra">
-    <span class="monograma" aria-hidden="true">CM</span>
+    <span class="monograma" id="monoF" aria-hidden="true">CM</span>
+    <img id="brasao" src="/web/midia/brasao.png" alt="Brasão de Monção" style="display:none;width:46px;height:auto" onload="this.style.display='block';document.getElementById('monoF').style.display='none'">
     <div>
       <h1>Câmara de Monção</h1>
       <span class="tag">Canal do cidadão · demonstração</span>
@@ -64,8 +66,8 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
     <p>Reclamações, denúncias, sugestões e contato com os vereadores, direto do seu celular. Um assistente responde na hora e a equipe da Câmara acompanha cada pedido.</p>
     <div class="acoes">
       <button class="btn-hero pri" data-chat>Falar com a Câmara</button>
-      <button class="btn-hero" data-chat>Agendar com vereador</button>
-      <button class="btn-hero" data-chat>Ouvidoria</button>
+      <button class="btn-hero" onclick="location.href='/vereadores'">Agendar com vereador</button>
+      <button class="btn-hero" data-chat data-prefill="Quero registrar uma reclamação ou denúncia na Ouvidoria da Câmara.">Ouvidoria</button>
     </div>
   </section>
 
@@ -93,12 +95,12 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
   <section class="bloco">
     <h3>Mesa diretora</h3>
     <div class="mesa">
-      <div class="ver"><b>Luís Alfredo</b><span>Presidente</span></div>
-      <div class="ver"><b>Daérlio</b><span>Vice-presidente</span></div>
-      <div class="ver"><b>Lindolene Aragão</b><span>1ª secretária</span></div>
-      <div class="ver"><b>Flávio Campos</b><span>2º secretário</span></div>
+      <div class="ver"><img loading="lazy" src="/web/midia/ver-daerlio.png" alt="Daerlio" onerror="this.remove()"><b>Daerlio</b><span>Presidente</span></div>
+      <div class="ver"><img loading="lazy" src="/web/midia/ver-lindolene-aragao.png" alt="Lindolene Aragão" onerror="this.remove()"><b>Lindolene Aragão</b><span>Vice-presidente</span></div>
+      <div class="ver"><img loading="lazy" src="/web/midia/ver-moizaniel.png" alt="Moizaniel" onerror="this.remove()"><b>Moizaniel</b><span>1º secretário</span></div>
+      <div class="ver"><img loading="lazy" src="/web/midia/ver-luis-alfredo.png" alt="Luís Alfredo" onerror="this.remove()"><b>Luís Alfredo</b><span>2º secretário</span></div>
     </div>
-    <p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">A Câmara de Monção tem 13 vereadores. Lista completa em <a href="https://www.cmmoncao.ma.gov.br/" style="color:var(--link)">cmmoncao.ma.gov.br</a>.</p>
+    <p style="text-align:center;color:var(--mut);font-size:13px;margin-top:10px">A Câmara de Monção tem 13 vereadores. <a href="/vereadores" style="color:var(--link)">Conheça todos e fale com o gabinete</a>.</p>
   </section>
 
   <section class="bloco">
@@ -114,6 +116,7 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
 
   <footer>
     Página de demonstração tecnológica: os atendimentos usam dados fictícios e nenhum relato tem efeito oficial.<br>
+    Brasão e fotos dos vereadores: site oficial da Câmara de Monção (cmmoncao.ma.gov.br).<br>
     Feita sobre o projeto aberto Atende Leads (INEMA, licença MIT).
   </footer>
 </div>
@@ -156,8 +159,18 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
   var landing=document.getElementById('landing'), chatview=document.getElementById('chatview');
   function abrir(){landing.hidden=true;chatview.hidden=false;document.body.classList.add('pagina-chat');window.scrollTo(0,0);}
   function fechar(){chatview.hidden=true;landing.hidden=false;document.body.classList.remove('pagina-chat');}
-  document.querySelectorAll('[data-chat]').forEach(function(b){b.addEventListener('click',abrir);});
+  document.querySelectorAll('[data-chat]').forEach(function(b){b.addEventListener('click',function(){
+    abrir();
+    var p=b.getAttribute('data-prefill');
+    if(p)document.getElementById('texto').value=p;
+  });});
   document.getElementById('voltar').addEventListener('click',fechar);
+  var gab=new URLSearchParams(location.search).get('gab');
+  if(gab){
+    abrir();
+    document.getElementById('texto').value='Olá! Quero agendar um horário no gabinete do(a) vereador(a) '+gab+'.';
+    document.querySelector('.barra-chat span').textContent='Gabinete do(a) vereador(a) '+gab+' · demonstração';
+  }
 })();
 </script>
 <script src="/web/comum.js"></script>

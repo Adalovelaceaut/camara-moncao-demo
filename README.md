@@ -40,7 +40,9 @@ A demo pode responder com um agente Hermes local em vez de só regras: `cerebro:
 
 ## Página inicial do cidadão (12/11)
 
-`web/index.html` substitui a página inicial do Atende Leads por uma landing da Câmara de Monção: hero com chamada, ações (falar com a Câmara, agendar com vereador, ouvidoria), "como funciona", serviços, mesa diretora e contatos públicos. O chat original fica embutido e abre a partir dos botões (sem mudar rotas nem o servidor). Para usar: copie por cima de `web/index.html` na instalação do Atende Leads (o arquivo original fica salvo como `index.original-chat.html.bak`).
+`web/index.html` substitui a página inicial do Atende Leads por uma landing da Câmara de Monção: hero com chamada, ações (falar com a Câmara, agendar com vereador, ouvidoria), "como funciona", serviços, mesa diretora com fotos e contatos públicos. O chat original fica embutido e abre a partir dos botões (sem mudar rotas nem o servidor). Para usar: copie por cima de `web/index.html` na instalação do Atende Leads (o arquivo original fica salvo como `index.original-chat.html.bak`).
+
+`web/vereadores.html` (rota `/vereadores`) é a galeria dos 13 vereadores: foto, nome, cargo na Mesa e partido; tocar na foto abre o chat já endereçado ao gabinete daquele vereador (`/?gab=<nome>`, mensagem pré-preenchida). O botão Ouvidoria abre o chat com mensagem pré-preenchida para a ouvidoria (atendimento pela equipe, ex.: Caio). Brasão e fotos vêm do site oficial da Câmara (cmmoncao.ma.gov.br), ficam só no servidor da demo em `web/midia/` (não versionados neste repo) e as páginas caem para iniciais se a imagem faltar.
 
 ## Módulo Gabinete (proposta + protótipo, 12/11)
 
