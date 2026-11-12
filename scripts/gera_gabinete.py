@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 # Gera web/gabinete.html: pagina do gabinete (LEGISLAR + FISCALIZAR) da demo Moncao.
-# Rascunhos de proposituras sao gerados pelo agente Hermes (127.0.0.1:8644) com fallback.
-import html, json, re, sys, urllib.request, datetime
+# Rascunhos de proposituras sao gerados pelo assistente virtual local (LLM) com fallback.
+# URL, modelo e chave do modelo local vem de variaveis de ambiente (nunca versionar segredos).
+import html, json, os, re, sys, urllib.request, datetime
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "/home/ada/camara-demo-hermes-app/web/gabinete.html"
-HERMES_URL = "http://127.0.0.1:8644/v1/chat/completions"
-HERMES_KEY = "7aac3403e4e9074e2705dfd55cd4602a68ba91c8bbec1889dd8b90425b95b684"
+OUT = sys.argv[1] if len(sys.argv) > 1 else "web/gabinete.html"
+CEREBRO_URL = os.environ.get("CEREBRO_URL", "http://127.0.0.1:8644/v1/chat/completions")
+CEREBRO_KEY = os.environ.get("CEREBRO_API_KEY", "")
+CEREBRO_MODELO = os.environ.get("CEREBRO_MODELO", "assistente-local")
 HOJE = datetime.date(2026, 11, 12)  # data de referencia da demonstracao
 
-def hermes(prompt, max_tokens=520):
+def assistente(prompt, max_tokens=520):
     corpo = json.dumps({
-        "model": "hermes-agent",
+        "model": CEREBRO_MODELO,
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens,
     }).encode()
-    req = urllib.request.Request(HERMES_URL, data=corpo, headers={
+    req = urllib.request.Request(CEREBRO_URL, data=corpo, headers={
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + HERMES_KEY,
+        "Authorization": "Bearer " + CEREBRO_KEY,
     })
     with urllib.request.urlopen(req, timeout=40) as r:
         d = json.loads(r.read())
@@ -45,23 +47,23 @@ JUSTIFICACAO: Relatos recebidos pelo gabinete apontam rua escorregadia e buracos
 }
 
 PROMPTS = {
-"indicacao": "Voce e o Hermes Camara, assistente legislativo do gabinete de uma vereadora da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de INDICACAO ao Chefe do Executivo municipal. Tema: recuperacao da iluminacao publica da Praca Presidente Kennedy, Centro de Moncao, motivada por 2 manifestacoes de moradores recebidas pelo canal de atendimento do gabinete. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 'FUNDAMENTACAO:' com 3 frases curtas citando que a praca e ponto de encontro e que moradores relatam inseguranca a noite, e por fim 1 paragrafo com a indicacao formal. Linguagem simples, sem parecer juridico.",
-"requerimento": "Voce e o Hermes Camara, assistente legislativo do gabinete de uma vereadora da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de REQUERIMENTO DE INFORMACOES ao Chefe do Executivo sobre interrupcoes no abastecimento de agua no Bairro Centro de Moncao, apos 3 relatos de moradores no canal do gabinete. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 'FUNDAMENTACAO:' com 3 frases curtas, depois 3 perguntas objetivas numeradas sobre causa, prazo de normalizacao e medidas programadas. Linguagem simples, sem parecer juridico.",
-"projeto": "Voce e o Hermes Camara, assistente legislativo do gabinete de um vereador da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de PROJETO DE LEI que institui o Programa Municipal de Manutencao Preventiva de Vias e Pracas, apos relatos de rua escorregadia e buracos. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 3 artigos curtos (Art. 1o, Art. 2o, Art. 3o) e uma JUSTIFICACAO de 2 frases. Linguagem simples, sem parecer juridico.",
+"indicacao": "Voce e o assistente virtual legislativo do gabinete de uma vereadora da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de INDICACAO ao Chefe do Executivo municipal. Tema: recuperacao da iluminacao publica da Praca Presidente Kennedy, Centro de Moncao, motivada por 2 manifestacoes de moradores recebidas pelo canal de atendimento do gabinete. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 'FUNDAMENTACAO:' com 3 frases curtas citando que a praca e ponto de encontro e que moradores relatam inseguranca a noite, e por fim 1 paragrafo com a indicacao formal. Linguagem simples, sem parecer juridico.",
+"requerimento": "Voce e o assistente virtual legislativo do gabinete de uma vereadora da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de REQUERIMENTO DE INFORMACOES ao Chefe do Executivo sobre interrupcoes no abastecimento de agua no Bairro Centro de Moncao, apos 3 relatos de moradores no canal do gabinete. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 'FUNDAMENTACAO:' com 3 frases curtas, depois 3 perguntas objetivas numeradas sobre causa, prazo de normalizacao e medidas programadas. Linguagem simples, sem parecer juridico.",
+"projeto": "Voce e o assistente virtual legislativo do gabinete de um vereador da Camara Municipal de Moncao (MA). Escreva um RASCUNHO curto de PROJETO DE LEI que institui o Programa Municipal de Manutencao Preventiva de Vias e Pracas, apos relatos de rua escorregadia e buracos. Formato exato: primeira linha 'EMENTA: <uma linha>', depois 3 artigos curtos (Art. 1o, Art. 2o, Art. 3o) e uma JUSTIFICACAO de 2 frases. Linguagem simples, sem parecer juridico.",
 }
 
 gerado_por = {}
 rascunhos = {}
 try:
-    hermes("Responda apenas: ok", max_tokens=8)  # aquecimento
+    assistente("Responda apenas: ok", max_tokens=8)  # aquecimento
 except Exception:
     pass
 for chave, prompt in PROMPTS.items():
     try:
-        rascunhos[chave] = hermes(prompt)
-        gerado_por[chave] = "Hermes"
+        rascunhos[chave] = assistente(prompt)
+        gerado_por[chave] = "assistente virtual"
     except Exception as e:
-        print("HERMES-FALHOU", chave, e, file=sys.stderr)
+        print("ASSISTENTE-FALHOU", chave, e, file=sys.stderr)
         rascunhos[chave] = FALLBACK[chave]
         gerado_por[chave] = "modelo local (fallback)"
 
@@ -254,7 +256,7 @@ footer{{margin-top:24px;color:var(--mut);font-size:12px;text-align:center;border
 <p class="secao-desc">Cada gabinete tem seu espaço e seus próprios assessores; a visão geral soma todos. Escolha um gabinete para ver só as demandas, protocolos e rascunhos dele. Dados fictícios de demonstração.</p>
 
 <div class="secao">Legislar</div>
-<p class="secao-desc">As demandas que chegam pelo chat viram pauta: agrupadas por assunto e bairro, o assistente Hermes redige o <b>rascunho</b> da propositura (indicação, requerimento ou projeto de lei) — sempre para o vereador revisar antes de protocolar. Não é parecer jurídico.</p>
+<p class="secao-desc">As demandas que chegam pelo chat viram pauta: agrupadas por assunto e bairro, o assistente virtual redige o <b>rascunho</b> da propositura (indicação, requerimento ou projeto de lei) — sempre para o vereador revisar antes de protocolar. Não é parecer jurídico.</p>
 
 <h2 style="font-family:var(--titulo);font-size:15px;margin:12px 0 8px">Demandas agrupadas (do canal do cidadão)</h2>
 <div class="cards">{demandas_html}</div>
@@ -276,7 +278,7 @@ footer{{margin-top:24px;color:var(--mut);font-size:12px;text-align:center;border
 
 <footer>Página de demonstração gerada em {agora}. Protocolos, prazos, demandas e rascunhos são fictícios.<br>
 Brasão: site oficial da Câmara de Monção (cmmoncao.ma.gov.br).<br>
-Os rascunhos de propositura são texto de apoio gerado por IA (agente Hermes) e exigem revisão do vereador antes de qualquer uso oficial.</footer>
+Os rascunhos de propositura são texto de apoio gerado por IA (assistente virtual) e exigem revisão do vereador antes de qualquer uso oficial.</footer>
 </div>
 <script>
 document.getElementById('selgab').addEventListener('change',function(){{

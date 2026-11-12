@@ -2,8 +2,8 @@
 # Gera web/prestacao.html (painel publico de prestacao de contas) a partir do leads.db da demo.
 import sqlite3, html, datetime, sys
 
-DB = sys.argv[1] if len(sys.argv) > 1 else "/home/ada/camara-demo-hermes-dados/leads.db"
-OUT = sys.argv[2] if len(sys.argv) > 2 else "/home/ada/camara-demo-hermes-app/web/prestacao.html"
+DB = sys.argv[1] if len(sys.argv) > 1 else "leads.db"
+OUT = sys.argv[2] if len(sys.argv) > 2 else "web/prestacao.html"
 
 db = sqlite3.connect("file:%s?mode=ro" % DB, uri=True)
 leads = db.execute("SELECT count(*) FROM leads").fetchone()[0]
