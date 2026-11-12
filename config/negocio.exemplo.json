@@ -1,0 +1,174 @@
+{
+  "nome": "Câmara de Monção",
+  "token_gestor": "TROQUE-ME-token-gestor",
+  "url_publica": "http://localhost:8097",
+  "horarios": {
+    "seg": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "ter": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "qua": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "qui": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "sex": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "sab": [
+      [
+        "08:00",
+        "12:00"
+      ]
+    ],
+    "dom": []
+  },
+  "prazos": {
+    "oferta_min": 2,
+    "alerta_quente_min": 2,
+    "alerta_normal_min": 5,
+    "lembrete_min": 30
+  },
+  "equipe": [
+    {
+      "id": "ana",
+      "nome": "Ana (gabinete)",
+      "telefone": "5598999000001",
+      "codigo": "TROQUE-ME-codigo"
+    },
+    {
+      "id": "caio",
+      "nome": "Caio (ouvidoria)",
+      "telefone": "5598999000002",
+      "codigo": "TROQUE-ME-codigo"
+    }
+  ],
+  "produtos": [
+    {
+      "id": "falar-vereador",
+      "nome": "Falar com um vereador",
+      "palavras": [
+        "vereador",
+        "agendar",
+        "reuniao"
+      ],
+      "preco": ""
+    },
+    {
+      "id": "ouvidoria",
+      "nome": "Ouvidoria: reclamação, denúncia ou sugestão",
+      "palavras": [
+        "ouvidoria",
+        "reclamacao",
+        "denuncia",
+        "sugestao"
+      ],
+      "preco": ""
+    },
+    {
+      "id": "informacoes",
+      "nome": "Informações e serviços da Câmara",
+      "palavras": [
+        "informacao",
+        "servicos",
+        "duvida"
+      ],
+      "preco": ""
+    }
+  ],
+  "faq": [
+    {
+      "id": "falta-agua",
+      "perguntas": [
+        "falta agua",
+        "sem agua",
+        "faltou agua",
+        "agua no bairro",
+        "torneira seca"
+      ],
+      "resposta": "Registrei sua reclamação sobre a falta d'água. A Câmara encaminha o relato ao serviço de água e cobra resposta. Se puder, informe o bairro e a rua para agilizar o encaminhamento."
+    },
+    {
+      "id": "ponte",
+      "perguntas": [
+        "ponte",
+        "ponte quebrada",
+        "problema na ponte",
+        "buraco na ponte"
+      ],
+      "resposta": "Os relatos sobre a ponte são encaminhados pela Câmara à secretaria responsável por obras, com cobrança formal de providências. Informe o trecho ou local exato para o registro ficar completo."
+    },
+    {
+      "id": "servicos",
+      "perguntas": [
+        "quais servicos",
+        "servicos da camara",
+        "o que a camara faz",
+        "para que serve a camara"
+      ],
+      "resposta": "A Câmara de Monção fiscaliza a prefeitura, vota leis do município e recebe demandas da população. Aqui você pode registrar reclamações, pedir informações e agendar conversa com um vereador."
+    },
+    {
+      "id": "vereador",
+      "perguntas": [
+        "falar com vereador",
+        "consulta ao vereador",
+        "agendar com vereador",
+        "quero falar com um vereador"
+      ],
+      "resposta": "Para falar com um vereador, eu agendo um horário no gabinete. Me diga seu nome e o assunto, e a equipe confirma o dia e a hora."
+    },
+    {
+      "id": "ouvidoria",
+      "perguntas": [
+        "ouvidoria",
+        "quero reclamar",
+        "denuncia",
+        "sugestao"
+      ],
+      "resposta": "A ouvidoria recebe reclamações, denúncias e sugestões sobre os serviços públicos de Monção. Seu relato é registrado com número de protocolo e a Câmara acompanha a resposta."
+    },
+    {
+      "id": "horario",
+      "perguntas": [
+        "horario de atendimento",
+        "que horas atende",
+        "quando abre"
+      ],
+      "resposta": "O atendimento humano funciona de segunda a sexta, das 8h às 20h, e sábado das 8h às 12h. Fora desse horário eu registro sua mensagem e a equipe responde na abertura."
+    }
+  ],
+  "cerebro": {
+    "tipo": "regras"
+  },
+  "info": {
+    "horario_atendimento": "Segunda a sexta, 8h às 20h; sábado, 8h às 12h.",
+    "endereco": "",
+    "pagamento": "",
+    "entrega": "",
+    "garantia": "",
+    "site": "",
+    "observacoes": ""
+  },
+  "aprendizado": {
+    "periodo": "semanal"
+  }
+}
