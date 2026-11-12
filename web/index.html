@@ -32,9 +32,10 @@ section.bloco h3{font-family:var(--titulo);font-size:20px;margin:0 0 14px;text-a
 .serv{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;font-size:14px}
 .serv b{display:block;margin-bottom:2px}
 .serv span{color:var(--mut);font-size:12.5px}
-.mesa{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.ver{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:12px 16px}
-.ver img{width:100%;height:150px;object-fit:cover;object-position:top;border-radius:10px;margin-bottom:8px}
+.mesa{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:760px;margin:0 auto}
+@media(min-width:900px){.mesa{grid-template-columns:repeat(4,1fr);max-width:none}}
+.ver{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:12px 16px;text-align:center}
+.ver img{width:100%;height:200px;object-fit:cover;object-position:top;border-radius:10px;margin-bottom:8px}
 .ver b{font-size:14px}
 .ver span{display:block;color:var(--mut);font-size:12px}
 .onde{background:var(--sup);border:1px solid var(--linha);border-radius:14px;padding:16px;font-size:14px;line-height:1.7}
@@ -46,7 +47,7 @@ footer{margin-top:30px;text-align:center;color:var(--mut);font-size:12px;line-he
 .barra-chat span{font-size:13px;color:var(--mut)}
 #chatview .chat-app{flex:1;min-height:0;width:100%}
 @media(min-width:640px){.acoes{flex-direction:row;max-width:640px}.btn-hero{flex:1}}
-@media(max-width:640px){.pilares{grid-template-columns:1fr}.grade{grid-template-columns:1fr}.mesa{grid-template-columns:1fr}.hero h2{font-size:27px}}
+@media(max-width:640px){.pilares{grid-template-columns:1fr}.grade{grid-template-columns:1fr}.hero h2{font-size:27px}}
 </style>
 </head>
 <body>
