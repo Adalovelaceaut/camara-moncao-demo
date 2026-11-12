@@ -29,3 +29,11 @@ A demo roda 100% local (ou em qualquer máquina), sem WhatsApp, sem Telegram, se
 - Atende Leads é um projeto de terceiros (INEMA); este repositório contém apenas configuração e scripts da demonstração.
 
 Licença deste repositório: MIT.
+
+## Identidade visual de Monção (12/11)
+
+A configuração usa a identidade do site oficial da Câmara (cmmoncao.ma.gov.br): tema `marinho` com destaque dourado `#f0a500` e nome exibido "Câmara de Monção — demonstração". A base de conhecimento inclui dados públicos reais: endereço (Praça Presidente Kennedy, Centro), horário (seg-sex 8h-12h, 13h30-17h), mesa diretora, bairros/povoados e contatos oficiais. Sem brasão ou logotipo — só cores, nome e informações públicas, sempre marcado como demonstração.
+
+## Cérebro LLM (opcional)
+
+A demo pode responder com um agente Hermes local em vez de só regras: `cerebro: {"tipo": "openai", "url": "http://127.0.0.1:8644", "modelo": "hermes-agent"}` + variáveis `CEREBRO_API_KEY` e `CEREBRO_HOSTS_PERMITIDOS=127.0.0.1`. O agente roda isolado (HERMES_HOME próprio, api_server só em localhost, sem ferramentas) com persona em `SOUL.md`. Na instalação de referência ele usa uma conta ChatGPT pessoal já existente — válido só para demonstração, não para produção.

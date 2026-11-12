@@ -153,22 +153,66 @@
         "que horas atende",
         "quando abre"
       ],
-      "resposta": "O atendimento humano funciona de segunda a sexta, das 8h às 20h, e sábado das 8h às 12h. Fora desse horário eu registro sua mensagem e a equipe responde na abertura."
+      "resposta": "O atendimento da Câmara de Monção funciona de segunda a sexta, das 8h às 12h e das 13h30 às 17h, na Praça Presidente Kennedy, Centro. Fora desse horário eu registro sua mensagem e a equipe responde na abertura."
+    },
+    {
+      "id": "endereco",
+      "perguntas": [
+        "onde fica a camara",
+        "endereco da camara",
+        "local da camara",
+        "como chegar na camara"
+      ],
+      "resposta": "A Câmara Municipal de Monção fica na Praça Presidente Kennedy, s/n, Centro, Monção-MA (CEP 65360-000). O prédio administrativo e de reuniões fica na Rua da Saudade, s/n, Centro."
+    },
+    {
+      "id": "vereadores-lista",
+      "perguntas": [
+        "quem sao os vereadores",
+        "lista de vereadores",
+        "quantos vereadores",
+        "presidente da camara"
+      ],
+      "resposta": "A Câmara de Monção tem 13 vereadores. A mesa diretora: presidente Luís Alfredo, vice Daérlio, 1ª secretária Lindolene Aragão e 2º secretário Flávio Campos. A lista completa está no site cmmoncao.ma.gov.br."
+    },
+    {
+      "id": "bairros",
+      "perguntas": [
+        "bairros de moncao",
+        "povoados",
+        "meu bairro",
+        "zona rural"
+      ],
+      "resposta": "O relato pode ser de qualquer bairro ou povoado de Monção: Centro, Cidade Nova, Castelo, Trizidela, Santa Rita, Areias, Vila da Paz e demais povoados. Informe o local no relato para o registro ficar completo."
+    },
+    {
+      "id": "contato",
+      "perguntas": [
+        "telefone da camara",
+        "email da camara",
+        "contato da camara"
+      ],
+      "resposta": "Os contatos da Câmara de Monção são (98) 98540-4359 e (98) 99102-6875, e o e-mail diretoria@cmmoncao.ma.gov.br. O site oficial é cmmoncao.ma.gov.br."
     }
   ],
   "cerebro": {
     "tipo": "regras"
   },
   "info": {
-    "horario_atendimento": "Segunda a sexta, 8h às 20h; sábado, 8h às 12h.",
-    "endereco": "",
+    "horario_atendimento": "Segunda a sexta, 8h às 12h e 13h30 às 17h.",
+    "endereco": "Praça Presidente Kennedy, s/n, Centro, Monção-MA — CEP 65360-000",
     "pagamento": "",
     "entrega": "",
     "garantia": "",
-    "site": "",
+    "site": "https://www.cmmoncao.ma.gov.br/",
     "observacoes": ""
   },
   "aprendizado": {
     "periodo": "semanal"
+  },
+  "aparencia": {
+    "tema": "marinho",
+    "cor_destaque": "#f0a500",
+    "nome_exibido": "Câmara de Monção — demonstração"
   }
 }
